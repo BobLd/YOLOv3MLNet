@@ -13,11 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\Output\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Assets\Images\PMC5055614_00001.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Output\PMC5055614_00001._processed.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
