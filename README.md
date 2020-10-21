@@ -8,7 +8,7 @@ Model can be found in the following Medium article: [Object Detection — Docume
 # Train and export to onnx in Python
 
 # Check exported model with Netron
-
+![neutron](https://github.com/BobLd/YOLOv3MLNet/blob/master/netron.png)
 # Load model in C#
 
 # Predict in C#
