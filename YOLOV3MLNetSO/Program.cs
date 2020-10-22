@@ -53,7 +53,7 @@ namespace YOLOV3MLNetSO
             var predictionEngine = mlContext.Model.CreatePredictionEngine<YoloV3BitmapData, YoloV3Prediction>(model);
 
             // load image
-            string imageName = "cars road.jpg";
+            string imageName = "dog_cat.jpg";
             using (var bitmap = new Bitmap(Image.FromFile(Path.Combine(imageFolder, imageName))))
             {
                 var preview = model.Preview(mlContext.Data.LoadFromEnumerable(new List<YoloV3BitmapData>() { new YoloV3BitmapData() { Image = bitmap } }));
