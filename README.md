@@ -79,8 +79,6 @@ More information can be found in this article: [YOLO v3 theory explained](https:
 # Load model in C#
 
 # Predict in C#
-![input](YOLOv3MLNet/Assets/Images/PMC5055614_00001.jpg)
-
 ![output](YOLOv3MLNet/Assets/Output/PMC5055614_00001._processed.jpg)
 
 # Resources
