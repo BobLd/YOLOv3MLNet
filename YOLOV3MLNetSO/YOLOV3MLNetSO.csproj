@@ -13,20 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Assets\Images\1200px-Moscow_traffic_congestion.JPG">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Assets\Images\cars road.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Assets\Images\dog_cat.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Images\DSC00401.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Images\stock-photo-mumbai.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Assets\Output\dog_cat._processed.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -14,6 +14,8 @@ namespace YOLOV3MLNetSO
      */
     class Program
     {
+        const string modelPath = @"D:\yolov3-10.onnx";
+
         const string imageFolder = @"Assets\Images";
 
         const string imageOutputFolder = @"Assets\Output";
@@ -30,7 +32,7 @@ namespace YOLOV3MLNetSO
 
             // Define scoring pipeline
             var pipeline = mlContext.Transforms.ResizeImages(inputColumnName: "bitmap", outputColumnName: "input_1", imageWidth: 416, imageHeight: 416, resizing: ResizingKind.IsoPad)
-                .Append(mlContext.Transforms.ExtractPixels(outputColumnName: "input_1", outputAsFloatArray: true, scaleImage: 1f / 255f))
+                .Append(mlContext.Transforms.ExtractPixels(outputColumnName: "input_1", scaleImage: 1f / 255f))
                 .Append(mlContext.Transforms.Concatenate("image_shape", "height", "width"))
                 .Append(mlContext.Transforms.ApplyOnnxModel(shapeDictionary: new Dictionary<string, int[]>() { { "input_1", new[] { 1, 3, 416, 416 } } },
                                 inputColumnNames: new[]
@@ -44,7 +46,7 @@ namespace YOLOV3MLNetSO
                                     "yolonms_layer_1/ExpandDims_3:0",
                                     "yolonms_layer_1/concat_2:0"
                                 },
-                                modelFile: @"D:\yolov3-10.onnx"));
+                                modelFile: modelPath));
 
             // Fit on empty list to obtain input data schema
             var model = pipeline.Fit(mlContext.Data.LoadFromEnumerable(new List<YoloV3BitmapData>()));
@@ -53,10 +55,11 @@ namespace YOLOV3MLNetSO
             var predictionEngine = mlContext.Model.CreatePredictionEngine<YoloV3BitmapData, YoloV3Prediction>(model);
 
             // load image
-            string imageName = "dog_cat.jpg";
+            string imageName = "cars road.jpg";
             using (var bitmap = new Bitmap(Image.FromFile(Path.Combine(imageFolder, imageName))))
             {
-                var preview = model.Preview(mlContext.Data.LoadFromEnumerable(new List<YoloV3BitmapData>() { new YoloV3BitmapData() { Image = bitmap } }));
+                //var preview = model.Preview(mlContext.Data.LoadFromEnumerable(new List<YoloV3BitmapData>() { new YoloV3BitmapData() { Image = bitmap } }));
+
                 // predict
                 var predict = predictionEngine.Predict(new YoloV3BitmapData() { Image = bitmap });
                 var results = GetResults(predict, classesNames);
