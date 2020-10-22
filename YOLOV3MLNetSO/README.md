@@ -52,7 +52,7 @@ public class YoloV3Prediction
 	/// Concat
 	/// </summary>
 	[ColumnName("yolonms_layer_1/concat_2:0")]
-	public int[] Concat;
+	public int[] Concat { get; set; }
 }
 ```
 
@@ -89,7 +89,7 @@ var predictionEngine = mlContext.Model.CreatePredictionEngine<YoloV3BitmapData, 
 As per the model documentation, the output shapes are:
 > The model has 3 outputs. boxes: (1x'n_candidates'x4), the coordinates of all anchor boxes, scores: (1x80x'n_candidates'), the scores of all anchor boxes per class, indices: ('nbox'x3), selected indices from the boxes tensor. The selected index format is (batch_index, class_index, box_index).
 
-The function will help you process the results, I leave it to you fine-tune it. The score does not seems to be correct.
+The function below will help you process the results, I leave it to you fine-tune it.
 
 ```csharp
 public IReadOnlyList<YoloV3Result> GetResults(YoloV3Prediction prediction, string[] categories)
@@ -121,12 +121,15 @@ public IReadOnlyList<YoloV3Result> GetResults(YoloV3Prediction prediction, strin
 		var class_index = res[1];
 		var box_index = res[2];
 
-		var label = categories[class_index];
-
-		var bbox = prediction.Boxes.Skip(box_index * 4).Take(4).ToArray();
-
-		var scores = prediction.Scores.Skip(class_index * categories.Length).Take(categories.Length).ToArray();
-		var score = scores[class_index];
+                var label = categories[class_index];
+                var bbox = new float[]
+                {
+                    prediction.Boxes[box_index * 4],
+                    prediction.Boxes[box_index * 4 + 1],
+                    prediction.Boxes[box_index * 4 + 2],
+                    prediction.Boxes[box_index * 4 + 3],
+                };
+                var score = prediction.Scores[box_index + class_index * YoloV3Prediction.YoloV3BboxPredictionCount];
 
 		results.Add(new YoloV3Result(bbox, label, score));
 	}
@@ -174,4 +177,3 @@ using (var bitmap = new Bitmap(Image.FromFile(Path.Combine(imageFolder, imageNam
 ```
 
 ![example](https://github.com/BobLd/YOLOv3MLNet/blob/master/YOLOV3MLNetSO/Assets/Output/dog_cat._processed.jpg)
-Again, the score does not seems to be correct. Any help welcome!
