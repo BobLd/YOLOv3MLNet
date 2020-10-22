@@ -52,6 +52,9 @@ torch.onnx.export(gtf.system_dict["local"]["model"],
 ```
 
 # Check exported model with Netron
+The ONNX model can be viewed in [Netron](https://www.electronjs.org/apps/netron). Our model looks like this:
+![neutron](https://github.com/BobLd/YOLOv3MLNet/blob/master/netron.png)
+
 - The input layer size is [1 x 3 x 416 x 416]. This corresponds to 1 batch size x 3 colors x 416 pixels height x 416 pixel width.
 
 As per this [article](https://medium.com/analytics-vidhya/yolo-v3-theory-explained-33100f6d193):
@@ -61,9 +64,13 @@ As per this [article](https://medium.com/analytics-vidhya/yolo-v3-theory-explain
 
 Hence, each bounding box has (4 + classes) = 22 features. The total number of prediction in this model is 22 x 10,647.
 
-**NB**: The ONNX conversion removes 1 feature which is the bounding box confidence. The original model has (5 + classes) features for each bounding box.
+**NB**: The ONNX conversion removes 1 feature which is the *objectness score*, p<sub>c</sub>. The original model has (5 + classes) features for each bounding box.
+We will use the class probability as a proxy for the *objectness score*.
 
-![neutron](https://github.com/BobLd/YOLOv3MLNet/blob/master/netron.png)
+![medium-explanation](https://miro.medium.com/max/700/1*6KLkWAWCINb8kVNuPRaDMQ.png)
+
+More information can be found in this article: [YOLO v3 theory explained](https://medium.com/analytics-vidhya/yolo-v3-theory-explained-33100f6d193)
+
 # Load model in C#
 
 # Predict in C#
