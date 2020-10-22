@@ -61,7 +61,7 @@ As per this [article](https://medium.com/analytics-vidhya/yolo-v3-theory-explain
 
 Hence, each bounding box has (4 + classes) = 22 features. The total number of prediction in this model is 22 x 10,647.
 
-**NB**: The ONNX conversion removes 1 feature which is the bounding box confidence. The original model has (5 + classes) feature for each bounding box.
+**NB**: The ONNX conversion removes 1 feature which is the bounding box confidence. The original model has (5 + classes) features for each bounding box.
 
 ![neutron](https://github.com/BobLd/YOLOv3MLNet/blob/master/netron.png)
 # Load model in C#
