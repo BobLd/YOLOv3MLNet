@@ -176,4 +176,4 @@ using (var bitmap = new Bitmap(Image.FromFile(Path.Combine(imageFolder, imageNam
 }
 ```
 
-![example](https://github.com/BobLd/YOLOv3MLNet/blob/master/YOLOV3MLNetSO/Assets/Output/dog_cat._processed.jpg)
+![example](https://github.com/BobLd/YOLOv3MLNet/blob/master/YOLOV3MLNetSO/Assets/Output/cars%20road._processed.jpg)
