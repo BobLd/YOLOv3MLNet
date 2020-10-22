@@ -82,3 +82,4 @@ More information can be found in this article: [YOLO v3 theory explained](https:
 - https://medium.com/towards-artificial-intelligence/object-detection-document-layout-analysis-using-monk-object-detection-toolkit-6c57200bde5
 - https://medium.com/analytics-vidhya/yolo-v3-theory-explained-33100f6d193
 - https://towardsdatascience.com/non-maximum-suppression-nms-93ce178e177c
+- https://michhar.github.io/convert-pytorch-onnx/
