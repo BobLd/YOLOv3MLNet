@@ -1,6 +1,7 @@
 ﻿using Microsoft.ML.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace YOLOv3MLNet.DataStructures
@@ -98,7 +99,7 @@ namespace YOLOv3MLNet.DataStructures
                 resultsNms.Add(new YoloV3Result(scaleCoords(res.Take(4).ToArray(), ImageHeight, ImageWidth, heightScale, widthScale, heightPad, widthPad), label, conf));
                 results[f] = null;
 
-                var iou = results.Select(bbox => bbox == null ? float.NaN : BoxIou(res, bbox)).ToList();
+                var iou = results.Select(bbox => bbox == null ? float.NaN : BoxIoU(res, bbox)).ToList();
                 for (int i = 0; i < iou.Count; i++)
                 {
                     if (float.IsNaN(iou[i])) continue;
@@ -131,7 +132,7 @@ namespace YOLOv3MLNet.DataStructures
         /// Return intersection-over-union (Jaccard index) of boxes.
         /// <para>Both sets of boxes are expected to be in (x1, y1, x2, y2) format.</para>
         /// </summary>
-        public static float BoxIou(float[] boxes1, float[] boxes2)
+        public static float BoxIoU(float[] boxes1, float[] boxes2)
         {
             static float box_area(float[] box)
             {
@@ -140,6 +141,9 @@ namespace YOLOv3MLNet.DataStructures
 
             var area1 = box_area(boxes1);
             var area2 = box_area(boxes2);
+
+            Debug.Assert(area1 >= 0);
+            Debug.Assert(area2 >= 0);
 
             var dx = Math.Max(0, Math.Min(boxes1[2], boxes2[2]) - Math.Max(boxes1[0], boxes2[0]));
             var dy = Math.Max(0, Math.Min(boxes1[3], boxes2[3]) - Math.Max(boxes1[1], boxes2[1]));
