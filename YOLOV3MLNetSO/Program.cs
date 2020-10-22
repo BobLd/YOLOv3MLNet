@@ -53,13 +53,12 @@ namespace YOLOV3MLNetSO
             var predictionEngine = mlContext.Model.CreatePredictionEngine<YoloV3BitmapData, YoloV3Prediction>(model);
 
             // load image
-            string imageName = "dog_cat.jpg";
+            string imageName = "cars road.jpg";
             using (var bitmap = new Bitmap(Image.FromFile(Path.Combine(imageFolder, imageName))))
             {
                 var preview = model.Preview(mlContext.Data.LoadFromEnumerable(new List<YoloV3BitmapData>() { new YoloV3BitmapData() { Image = bitmap } }));
                 // predict
                 var predict = predictionEngine.Predict(new YoloV3BitmapData() { Image = bitmap });
-
                 var results = GetResults(predict, classesNames);
 
                 // draw predictions
@@ -117,11 +116,14 @@ namespace YOLOV3MLNetSO
                 var box_index = res[2];
 
                 var label = categories[class_index];
-
-                var bbox = prediction.Boxes.Skip(box_index * 4).Take(4).ToArray();
-
-                var scores = prediction.Scores.Skip(class_index * categories.Length).Take(categories.Length).ToArray();
-                var score = scores[class_index];
+                var bbox = new float[]
+                {
+                    prediction.Boxes[box_index * 4],
+                    prediction.Boxes[box_index * 4 + 1],
+                    prediction.Boxes[box_index * 4 + 2],
+                    prediction.Boxes[box_index * 4 + 3],
+                };
+                var score = prediction.Scores[box_index + class_index * YoloV3Prediction.YoloV3BboxPredictionCount];
 
                 results.Add(new YoloV3Result(bbox, label, score));
             }
