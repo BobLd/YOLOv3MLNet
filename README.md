@@ -9,7 +9,7 @@ This is a case study on a document layout YOLO trained model. The model can be f
 - The ONNX conversion removes 1 feature which is the *objectness score*, p<sub>c</sub>. The original model has (5 + classes) features for each bounding box, the ONNX model has (4 + classes) features per bounding box. We will use the class probability as a proxy for the *objectness score* when performing the Non-maximum Suppression (NMS) step. This is a known issue, more info [here](https://github.com/ultralytics/yolov3/issues/750).
 - Image resizing is not optimised, and will always yield 416x416 size image. This is not the case in the original model (see this issue: [RECTANGULAR INFERENCE](https://github.com/ultralytics/yolov3/issues/232)).
 
-# Train and export to ONNX in Python
+# Export to ONNX in Python
 This is based on this article [Object Detection — Document Layout Analysis Using Monk AI](https://medium.com/towards-artificial-intelligence/object-detection-document-layout-analysis-using-monk-object-detection-toolkit-6c57200bde5).
 
 ## Load the model
