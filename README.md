@@ -1,9 +1,9 @@
+**Another case study, based on [this](https://github.com/onnx/models/tree/master/vision/object_detection_segmentation/yolov3) YOLO v3 model is available [here](https://github.com/BobLd/YOLOv3MLNet/tree/master/YOLOV3MLNetSO).**
+
 # YOLO v3 in ML.Net
 Use the YOLO v3 algorithms for object detection in C# using ML.Net. We start with a Torch model, then converting it to ONNX format and use it in ML.Net.
 
 This is a case study on a document layout YOLO trained model. The model can be found in the following Medium article: [Object Detection — Document Layout Analysis Using Monk AI](https://medium.com/towards-artificial-intelligence/object-detection-document-layout-analysis-using-monk-object-detection-toolkit-6c57200bde5).
-
-**Another case study, based on [this](https://github.com/onnx/models/tree/master/vision/object_detection_segmentation/yolov3) YOLO v3 model is available [here](https://github.com/BobLd/YOLOv3MLNet/tree/master/YOLOV3MLNetSO).**
 
 ## Main differences
 - The ONNX conversion removes 1 feature which is the *objectness score*, p<sub>c</sub>. The original model has (5 + classes) features for each bounding box, the ONNX model has (4 + classes) features per bounding box. We will use the class probability as a proxy for the *objectness score* when performing the Non-maximum Suppression (NMS) step. This is a known issue, more info [here](https://github.com/ultralytics/yolov3/issues/750).
