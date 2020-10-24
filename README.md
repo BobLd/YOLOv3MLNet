@@ -1,4 +1,4 @@
-# YOLO v3 in MLNet
+# YOLO v3 in ML.Net
 Use the YOLO v3 algorithms for object detection in C# using ML.Net. We start with a Torch model, then converting it to ONNX format and use it in ML.Net.
 
 This is a case study on a document layout YOLO trained model. The model can be found in the following Medium article: [Object Detection — Document Layout Analysis Using Monk AI](https://medium.com/towards-artificial-intelligence/object-detection-document-layout-analysis-using-monk-object-detection-toolkit-6c57200bde5).
