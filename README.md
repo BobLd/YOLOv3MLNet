@@ -1,5 +1,7 @@
 **Another case study, based on [this](https://github.com/onnx/models/tree/master/vision/object_detection_segmentation/yolov3) YOLO v3 model is available [here](https://github.com/BobLd/YOLOv3MLNet/tree/master/YOLOV3MLNetSO).**
 
+**See [here](https://github.com/BobLd/YOLOv4MLNet) for YOLO v4 use.**
+
 # YOLO v3 in ML.Net
 Use the YOLO v3 algorithms for object detection in C# using ML.Net. We start with a Torch model, then converting it to ONNX format and use it in ML.Net.
 
