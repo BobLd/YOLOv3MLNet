@@ -46,7 +46,7 @@ namespace YOLOV3MLNetSO
                                     "yolonms_layer_1/ExpandDims_3:0",
                                     "yolonms_layer_1/concat_2:0"
                                 },
-                                modelFile: modelPath));
+                                modelFile: modelPath, recursionLimit: 100));
 
             // Fit on empty list to obtain input data schema
             var model = pipeline.Fit(mlContext.Data.LoadFromEnumerable(new List<YoloV3BitmapData>()));
@@ -58,8 +58,6 @@ namespace YOLOV3MLNetSO
             string imageName = "cars road.jpg";
             using (var bitmap = new Bitmap(Image.FromFile(Path.Combine(imageFolder, imageName))))
             {
-                //var preview = model.Preview(mlContext.Data.LoadFromEnumerable(new List<YoloV3BitmapData>() { new YoloV3BitmapData() { Image = bitmap } }));
-
                 // predict
                 var predict = predictionEngine.Predict(new YoloV3BitmapData() { Image = bitmap });
                 var results = GetResults(predict, classesNames);
